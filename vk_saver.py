@@ -12,7 +12,8 @@ from subprocess import call
 regex = re.compile("3pm\.[^\"]+?/:sptth")
 
 for line in sys.stdin:
-	line = ''.join(reversed(line))
-	song_tuple = map (lambda s: "".join(reversed(s)), regex.findall(line))
+	line = line[::-1]
+	song_tuple = map (lambda s: s[::-1], regex.findall(line))
 	for song in song_tuple: 
-		call(["wget -c", song])
+		call(["wget", song])
+#		call(["wget --no-clobber", song])
